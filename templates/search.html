@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+<form action="{{ url_for('search') }}" method="post">
+  <input type="text"
+  class="form-control mb-2"
+         name="search_input"
+         placeholder="Search a product">
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<h1>Average price: <span>{{ context.avg_price }}</span></h1>
+<section class="container d-flex flex-wrap justify-content-center">
+  {% for product in context.products %}
+  <div class="card my-4 mx-4" style="width: 14rem">
+    <img
+      class="card-img-top"
+      src="{{ product.image_uri }}"
+      alt="Card image cap"
+    />
+    <div class="card-body">
+      <h5 class="card-title">{{ product.title }}</h5>
+      <p class="card-text">{{ product.price }}</p>
+      <a href="{{ product.link }}" target="_blank" class="btn btn-primary"
+        >Buy</a
+      >
+    </div>
+  </div>
+  {% endfor %}
+</section>
+{% endblock %}
